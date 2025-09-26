@@ -4,8 +4,23 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-f>', '<C-f>zz')
 vim.keymap.set('n', '<C-b>', '<C-b>zz')
 
--- Git fugitive keymaps
-vim.keymap.set('n', '<leader>G', ':G<CR>', { desc = 'Git status' })
+-- Go to first character of the line
+vim.keymap.set('n', 'H', '^')
+-- Go to last character of the line
+vim.keymap.set('n', 'L', '$')
+
+-- Move selected line / block of text in visual mode
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- Keep cursor in the middle when joining lines
+vim.keymap.set("n", "J", "mzJ`z")
+
+-- greatest remap ever(Keep clipboard when pasting in visual mode)
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- Exit insert mode more easily
+vim.keymap.set('i', '<C-j>', '<Esc>', { noremap = true, silent = true, desc = 'Exit Insert mode' })
 
 -- Magic keymaps
 vim.keymap.set('n', '<leader>m1', ':CellularAutomaton game_of_life<CR>', { desc = 'Run Random Cellular Automaton' })
@@ -28,6 +43,12 @@ vim.keymap.set('n', '<leader>cf', function()
   vim.fn.setreg('+', file_path)
   print('Copied: ' .. file_path)
 end, { desc = 'Copy absolute file path to clipboard' })
+
+-- quickfix and location list navigation
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- Rails keymap
 vim.keymap.set("n", "<leader>grs", ":A<CR>", { desc = "Switch to spec file" })
