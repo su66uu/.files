@@ -497,7 +497,7 @@ require('lazy').setup({
 
           -- Show modified files using git status
           map('<leader>gs', require('telescope.builtin').git_status, '[G]it [S]tatus')
-
+          
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
