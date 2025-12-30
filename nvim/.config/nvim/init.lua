@@ -101,6 +101,8 @@ vim.g.have_nerd_font = false
 -- Custom options
 require 'custom.options'
 
+-- Custom Globals
+require 'custom.globals'
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
