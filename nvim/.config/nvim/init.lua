@@ -639,30 +639,28 @@ require('lazy').setup({
         },
       }
 
-      require('lspconfig').solargraph.setup {
-        mason = false,
-        cmd = {
-          'solargraph',
-          'stdio',
-        },
-        filetypes = { 'ruby', 'erb', 'haml' },
-        root_dir = require('lspconfig.util').root_pattern('Gemfile', '.git'),
-        settings = {
-          solargraph = {
-            rubyVersion = '2.7.8', -- Match project’s Ruby version
-            useBundler = true, -- Use project’s Gemfile for gem resolution
-            autoformat = false, -- Autoformat with Rubocop
-            completion = true,
-            diagnostics = true,
-            folding = true,
-            references = true,
-            rename = true,
-            symbols = true,
-            additionalPaths = { 'local_gems', 'db/patches' }, -- Project-specific paths
-          },
-        },
-        capabilities = vim.tbl_deep_extend('force', {}, capabilities),
-      }
+      -- vim.lsp.config('solargraph', {
+      --   cmd = {},
+      --   filetypes = { 'ruby', 'erb', 'haml' },
+      --   root_dir = require('lspconfig.util').root_pattern('Gemfile', '.git'),
+      --   settings = {
+      --     solargraph = {
+      --       rubyVersion = '2.7.8', -- Match project’s Ruby version
+      --       useBundler = true, -- Use project’s Gemfile for gem resolution
+      --       autoformat = false, -- Autoformat with Rubocop
+      --       completion = true,
+      --       diagnostics = true,
+      --       folding = true,
+      --       references = true,
+      --       rename = true,
+      --       symbols = true,
+      --       additionalPaths = { 'local_gems', 'db/patches' }, -- Project-specific paths
+      --     },
+      --   },
+      --   capabilities = vim.tbl_deep_extend('force', {}, capabilities),
+      -- })
+      --
+      -- vim.lsp.enable('solargraph', true)
     end,
   },
 
