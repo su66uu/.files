@@ -94,3 +94,11 @@ vim.keymap.set('n', '<leader>wr', ':wincmd r<CR>', { noremap = true, silent = tr
 
 -- Telescope neoclip
 vim.keymap.set('n', '<leader>cb', ':Telescope neoclip<CR>', { desc = 'Open neoclip' })
+
+-- Copilog keymaps
+vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-word)', { desc = 'Accept Copilot suggestion word' })
+
+vim.keymap.set('i', '<C-n>', '<Plug>(copilot-next)', { desc = 'Next Copilot suggestion' })
+vim.keymap.set('i', '<C-p>', '<Plug>(copilot-previous)', { desc = 'Previous Copilot suggestion' })
+
+vim.keymap.set('i', '<C-d>', '<Plug>(copilot-dismiss)', { desc = 'Dismiss Copilot suggestion' })
