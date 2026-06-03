@@ -486,7 +486,7 @@ require('lazy').setup({
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+          map('gds', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
@@ -801,6 +801,22 @@ require('lazy').setup({
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
     },
+    -- Custom config execution function to safely register your Go snippet block
+    config = function(_, opts)
+      -- 1. Initialize blink.cmp with the opts defined above
+      require('blink.cmp').setup(opts)
+
+      -- 2. Inject the custom Go "iferr" snippet to LuaSnip engine
+      local luasnip = require 'luasnip'
+      luasnip.add_snippets('go', {
+        luasnip.snippet('iferr', {
+          luasnip.text_node({ 'if err != nil {', '\treturn ' }),
+          luasnip.insert_node(1, 'err'),
+          luasnip.text_node({ '', '}' }),
+          luasnip.insert_node(0),
+        }),
+      })
+    end,
   },
 
   { -- You can easily change to a different colorscheme.
