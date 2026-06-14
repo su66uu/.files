@@ -810,7 +810,7 @@ require('lazy').setup({
       local luasnip = require 'luasnip'
       luasnip.add_snippets('go', {
         luasnip.snippet('iferr', {
-          luasnip.text_node({ 'if err != nil {', '\treturn ' }),
+          luasnip.text_node({ 'if err != nil {', '\t ' }),
           luasnip.insert_node(1, 'err'),
           luasnip.text_node({ '', '}' }),
           luasnip.insert_node(0),
