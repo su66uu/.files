@@ -9,6 +9,7 @@ return {
         markdown = { 'markdownlint-cli2' },
         yaml = { 'yamllint' },
         json = { 'jsonlint' },
+        swift = { 'swiftlint' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

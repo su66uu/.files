@@ -499,7 +499,7 @@ require('lazy').setup({
 
           -- Show modified files using git status
           map('<leader>gs', require('telescope.builtin').git_status, '[G]it [S]tatus')
-          
+
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
@@ -587,7 +587,8 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
-        --
+        ruby_lsp = {},
+        elixirls = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -638,29 +639,6 @@ require('lazy').setup({
           end,
         },
       }
-
-      -- vim.lsp.config('solargraph', {
-      --   cmd = {},
-      --   filetypes = { 'ruby', 'erb', 'haml' },
-      --   root_dir = require('lspconfig.util').root_pattern('Gemfile', '.git'),
-      --   settings = {
-      --     solargraph = {
-      --       rubyVersion = '2.7.8', -- Match project’s Ruby version
-      --       useBundler = true, -- Use project’s Gemfile for gem resolution
-      --       autoformat = false, -- Autoformat with Rubocop
-      --       completion = true,
-      --       diagnostics = true,
-      --       folding = true,
-      --       references = true,
-      --       rename = true,
-      --       symbols = true,
-      --       additionalPaths = { 'local_gems', 'db/patches' }, -- Project-specific paths
-      --     },
-      --   },
-      --   capabilities = vim.tbl_deep_extend('force', {}, capabilities),
-      -- })
-      --
-      -- vim.lsp.enable('solargraph', true)
     end,
   },
 
@@ -810,9 +788,9 @@ require('lazy').setup({
       local luasnip = require 'luasnip'
       luasnip.add_snippets('go', {
         luasnip.snippet('iferr', {
-          luasnip.text_node({ 'if err != nil {', '\t ' }),
+          luasnip.text_node { 'if err != nil {', '\t ' },
           luasnip.insert_node(1, 'err'),
-          luasnip.text_node({ '', '}' }),
+          luasnip.text_node { '', '}' },
           luasnip.insert_node(0),
         }),
       })
@@ -903,6 +881,8 @@ require('lazy').setup({
         'typescript',
         'vim',
         'vimdoc',
+        'elixir',
+        'eex',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
