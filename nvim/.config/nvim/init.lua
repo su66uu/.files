@@ -861,11 +861,12 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = {
+    config = function()
+      local treesitter = require 'nvim-treesitter'
+      local ensure_installed = {
         'bash',
         'c',
         'diff',
@@ -883,18 +884,29 @@ require('lazy').setup({
         'vimdoc',
         'elixir',
         'eex',
-      },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = false,
-    },
+      }
+
+      treesitter.setup()
+
+      local installed = treesitter.get_installed 'parsers'
+      local missing = vim.tbl_filter(function(parser)
+        return not vim.list_contains(installed, parser)
+      end, ensure_installed)
+      if #missing > 0 then
+        treesitter.install(missing)
+      end
+
+      vim.api.nvim_create_autocmd('FileType', {
+        desc = 'Enable Treesitter highlighting',
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+          -- Ruby indentation still benefits from its regex syntax rules.
+          if vim.bo[args.buf].filetype == 'ruby' then
+            vim.bo[args.buf].syntax = 'ruby'
+          end
+        end,
+      })
+    end,
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
