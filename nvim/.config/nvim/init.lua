@@ -418,6 +418,14 @@ require('lazy').setup({
       'saghen/blink.cmp',
     },
     config = function()
+      -- nvim-lspconfig does not create its legacy :LspInfo alias on Neovim 0.12,
+      -- where the native :lsp command is available.
+      if vim.fn.exists ':LspInfo' == 0 then
+        vim.api.nvim_create_user_command('LspInfo', 'checkhealth vim.lsp', {
+          desc = 'Show LSP configuration and client health',
+        })
+      end
+
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
