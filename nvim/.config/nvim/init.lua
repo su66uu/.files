@@ -724,10 +724,9 @@ require('lazy').setup({
     --- @type blink.cmp.Config
     opts = {
       -- disable for file types
-      disabled_filetypes = {
-        'TelescopePrompt',
-        'markdown',
-      },
+      enabled = function()
+        return not vim.tbl_contains({ 'TelescopePrompt', 'markdown' }, vim.bo.filetype)
+      end,
       keymap = {
         -- 'default' (recommended) for mappings similar to built-in completions
         --   <c-y> to accept ([y]es) the completion.
