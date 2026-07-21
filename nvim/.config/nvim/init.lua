@@ -357,6 +357,14 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>gg', '<cmd>Telescope git_files<CR>', { desc = 'Git tracked files' })
       vim.keymap.set('n', '<leader>gc', '<cmd>Telescope git_commits<CR>', { desc = 'Git commits' })
 
+      -- Find folders
+      vim.keymap.set('n', '<leader>sD', function()
+        builtin.find_files {
+          prompt_title = 'Find Directories',
+          find_command = { 'fd', '--type', 'directory' },
+        }
+      end, { desc = '[S]earch [D]irectories' })
+
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
