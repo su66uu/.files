@@ -8,12 +8,11 @@ vim.opt.textwidth = 120
 vim.opt.formatoptions:append("t")
 vim.opt.wrap = true
 vim.opt.linebreak = true
+vim.opt.breakindent = true
 
 -- Enable smart auto-indentation based on context
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-
-vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -51,9 +50,6 @@ vim.o.showmode = false
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
-
--- Enable break indent
-vim.o.breakindent = true
 
 -- Save undo history
 vim.o.undofile = true
@@ -96,4 +92,3 @@ vim.o.scrolloff = 10
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.o.confirm = true
-
